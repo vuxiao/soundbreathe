@@ -7,6 +7,7 @@ export type MixVolumes = Record<TrackId, number>;
 export interface TrackConfig {
   id: TrackId;
   name: string;
+  shortName: string;
   enName: string;
   subtitle: string;
   accent: string;
@@ -17,6 +18,7 @@ export const TRACKS: TrackConfig[] = [
   {
     id: 'rain',
     name: '细雨落窗',
+    shortName: '细雨',
     enName: 'Window Rain',
     subtitle: '滤波粉红噪声 · 柔和雨滴',
     accent: '#7dd3c8',
@@ -25,6 +27,7 @@ export const TRACKS: TrackConfig[] = [
   {
     id: 'ocean',
     name: '深夜海浪',
+    shortName: '海浪',
     enName: 'Midnight Tide',
     subtitle: 'LFO 潮汐调制 · 深海褐噪',
     accent: '#60a5fa',
@@ -33,6 +36,7 @@ export const TRACKS: TrackConfig[] = [
   {
     id: 'fire',
     name: '壁炉柴火',
+    shortName: '炉火',
     enName: 'Hearth Embers',
     subtitle: '低频暖噪 · 随机火星噼啪',
     accent: '#f0a675',
@@ -41,6 +45,7 @@ export const TRACKS: TrackConfig[] = [
   {
     id: 'crickets',
     name: '夏夜虫鸣',
+    shortName: '虫鸣',
     enName: 'Night Crickets',
     subtitle: '高频颤音调制 · 间歇节律',
     accent: '#a7e09b',
@@ -49,6 +54,7 @@ export const TRACKS: TrackConfig[] = [
   {
     id: 'cosmos',
     name: '宇宙深空',
+    shortName: '深空',
     enName: 'Deep Cosmos',
     subtitle: '低频 Drone 和弦 · 缓慢呼吸',
     accent: '#a5b4fc',
@@ -57,6 +63,7 @@ export const TRACKS: TrackConfig[] = [
   {
     id: 'forest',
     name: '森林微风',
+    shortName: '微风',
     enName: 'Pine Breeze',
     subtitle: '带通扫频白噪 · 轻拂林海',
     accent: '#5eead4',

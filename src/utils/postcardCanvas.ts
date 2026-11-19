@@ -236,7 +236,7 @@ export async function generatePostcardDataUrl(options: PostcardOptions): Promise
     ctx.textAlign = 'center';
     ctx.fillStyle = v > 0.01 ? 'rgba(240, 248, 252, 0.92)' : 'rgba(240, 248, 252, 0.34)';
     ctx.font = '400 24px "PingFang SC", -apple-system, sans-serif';
-    ctx.fillText(track.name.slice(0, 2), cx, barAreaTop + 46);
+    ctx.fillText(track.shortName, cx, barAreaTop + 46);
 
     ctx.fillStyle = v > 0.01 ? track.accent : 'rgba(240, 248, 252, 0.25)';
     ctx.font = '400 22px "SF Mono", Menlo, monospace';

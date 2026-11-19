@@ -547,7 +547,7 @@ export function App() {
                   </div>
 
                   {/* 触控热区 >= 44px 音量滑块 */}
-                  <div className="mt-0.5 px-0.5">
+                  <div className="mt-0.5 px-2.5">
                     <VolumeSlider
                       value={vol}
                       accent={track.accent}
