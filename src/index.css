@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --font-serif-display: "Songti SC", "STSong", "Noto Serif SC", "Source Han Serif SC", Georgia, "Times New Roman", serif;
+    --font-sans-ui: "PingFang SC", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Noto Sans SC", sans-serif;
+    --font-mono-timer: "SF Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  html,
+  body,
+  #root {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    background-color: #060a13;
+    color: #ebf2f7;
+    font-family: var(--font-sans-ui);
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior-y: none;
+  }
+}
+
+.font-serif-display {
+  font-family: var(--font-serif-display);
+}
+
+.font-mono-timer {
+  font-family: var(--font-mono-timer);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 隐藏横向滚动条但保留触控顺滑滑动 */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* 精致深海毛玻璃卡片 */
+.glass-panel {
+  background: linear-gradient(
+    145deg,
+    rgba(20, 32, 48, 0.52) 0%,
+    rgba(10, 17, 29, 0.66) 100%
+  );
+  backdrop-filter: blur(22px) saturate(135%);
+  -webkit-backdrop-filter: blur(22px) saturate(135%);
+  border: 1px solid rgba(190, 226, 240, 0.1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 12px 32px -12px rgba(2, 6, 14, 0.7);
+}
+
+.glass-pill {
+  background: rgba(18, 30, 46, 0.56);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(190, 226, 240, 0.12);
+}
+
+/* 细微有机噪点纹理 */
+.grain-overlay {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* 播放中细微波形柱律动 */
+@keyframes soundbarPulse {
+  0%, 100% {
+    transform: scaleY(0.32);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+.animate-soundbar {
+  transform-origin: bottom;
+  animation: soundbarPulse 1.4s ease-in-out infinite;
+}
+
+/* 呼吸中心柔和光环 */
+@keyframes slowRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-slow-rotate {
+  animation: slowRotate 28s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-soundbar,
+  .animate-slow-rotate {
+    animation: none;
+  }
+}
