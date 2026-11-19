@@ -1,8 +1,10 @@
+import fs from 'node:fs';
 import { chromium } from 'playwright-core';
 import { PNG } from 'pngjs';
 import jsQR from 'jsqr';
 
 const targetUrl = process.argv[2] || 'https://vuxiao.github.io/soundbreathe/';
+const screenshotDir = process.argv[3] || '';
 const chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 
 console.log(`🔍 开始在 390x844 移动端视口验收线上地址: ${targetUrl}`);
@@ -73,6 +75,10 @@ try {
   if (playLabelAfter !== '暂停环境音') {
     throw new Error(`播放按钮未切换状态: ${playLabelAfter}`);
   }
+  if (screenshotDir) {
+    fs.mkdirSync(screenshotDir, { recursive: true });
+    await page.screenshot({ path: `${screenshotDir}/home-mobile.png`, fullPage: false });
+  }
 
   // 2. 切换场景预设「海边发呆」
   await page.getByTestId('preset-seaside-drift').click();
@@ -93,9 +99,12 @@ try {
 
   // 4. 打开 4-7-8 呼吸疗愈模式并验证
   await page.getByTestId('open-breath-btn').click();
-  await page.waitForTimeout(400);
+  await page.waitForTimeout(600);
   const breathDialogVisible = await page.getByRole('dialog', { name: '4-7-8 呼吸疗愈模式' }).isVisible();
   if (!breathDialogVisible) throw new Error('呼吸疗愈弹窗未正常打开');
+  if (screenshotDir) {
+    await page.screenshot({ path: `${screenshotDir}/breath-mobile.png`, fullPage: false });
+  }
   console.log('- 4-7-8 呼吸疗愈全屏模式通过');
   await page.getByRole('button', { name: '退出呼吸疗愈模式' }).click();
   await page.waitForTimeout(200);
@@ -122,6 +131,9 @@ try {
 
   // 对明信片右下角二维码区域裁剪解码，端到端确认明信片内二维码可扫描且指向公网 URL！
   const posterBuf = Buffer.from(posterSrc.replace(/^data:image\/png;base64,/, ''), 'base64');
+  if (screenshotDir) {
+    fs.writeFileSync(`${screenshotDir}/postcard-output.png`, posterBuf);
+  }
   const fullPng = PNG.sync.read(posterBuf);
   const cropX = 720;
   const cropY = 1540;
