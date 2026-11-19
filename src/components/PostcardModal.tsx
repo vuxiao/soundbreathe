@@ -60,7 +60,7 @@ export const PostcardModal: React.FC<PostcardModalProps> = ({
       role="dialog"
       aria-modal="true"
       aria-label="今日声景明信片"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/78 px-4 backdrop-blur-lg"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/78 px-4 backdrop-blur-md"
       style={{
         paddingTop: 'max(16px, var(--safe-top))',
         paddingBottom: 'max(16px, var(--safe-bottom))',

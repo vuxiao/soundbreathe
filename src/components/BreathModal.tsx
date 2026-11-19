@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Pause, Play, RotateCcw, X } from 'lucide-react';
+import { RotateCcw, X } from 'lucide-react';
 
 interface BreathModalProps {
   open: boolean;
@@ -131,7 +131,7 @@ export const BreathModal: React.FC<BreathModalProps> = ({ open, onClose }) => {
       role="dialog"
       aria-modal="true"
       aria-label="4-7-8 呼吸疗愈模式"
-      className="fixed inset-0 z-50 flex flex-col items-center justify-between bg-[#050912]/92 px-6 backdrop-blur-2xl"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-between bg-[#050912]/94 px-6 backdrop-blur-md"
       style={{
         paddingTop: 'max(20px, var(--safe-top))',
         paddingBottom: 'max(28px, var(--safe-bottom))',
@@ -286,9 +286,18 @@ export const BreathModal: React.FC<BreathModalProps> = ({ open, onClose }) => {
           <button
             type="button"
             onClick={() => setRunning((r) => !r)}
-            className="flex h-12 min-w-[144px] items-center justify-center gap-2 rounded-full border border-[#7dd3c8]/40 bg-[#7dd3c8]/18 px-6 text-sm font-medium text-[#e4faf7] shadow-lg transition hover:bg-[#7dd3c8]/28 active:scale-95"
+            className="flex h-12 min-w-[148px] items-center justify-center gap-2.5 rounded-full border border-[#7dd3c8]/42 bg-[#7dd3c8]/18 px-6 text-sm font-medium text-[#e8fbf8] shadow-lg transition hover:bg-[#7dd3c8]/28 active:scale-95"
           >
-            {running ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+            {running ? (
+              <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 fill-current" aria-hidden="true">
+                <rect x="3" y="2.5" width="3.5" height="11" rx="1.6" />
+                <rect x="9.5" y="2.5" width="3.5" height="11" rx="1.6" />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 fill-current" aria-hidden="true">
+                <path d="M4.2 2.7c0-.9.97-1.45 1.75-1l7.1 4.1c.78.45.78 1.55 0 2l-7.1 4.1c-.78.45-1.75-.1-1.75-1V2.7Z" />
+              </svg>
+            )}
             <span>{running ? '暂停节律' : '继续呼吸'}</span>
           </button>
         </div>

@@ -43,31 +43,46 @@
   display: none;
 }
 
-/* 精致深海毛玻璃卡片 */
-.glass-panel {
+/* 高性能深海半透明卡片（零 backdrop-filter，保证移动端 60fps 零闪屏滚动） */
+.surface-card {
   background: linear-gradient(
-    145deg,
-    rgba(20, 32, 48, 0.52) 0%,
-    rgba(10, 17, 29, 0.66) 100%
+    155deg,
+    rgba(19, 32, 48, 0.72) 0%,
+    rgba(10, 18, 30, 0.84) 100%
   );
-  backdrop-filter: blur(22px) saturate(135%);
-  -webkit-backdrop-filter: blur(22px) saturate(135%);
   border: 1px solid rgba(190, 226, 240, 0.1);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 12px 32px -12px rgba(2, 6, 14, 0.7);
+    0 10px 26px -14px rgba(2, 6, 14, 0.78);
 }
 
+/* 仅用于模态弹窗的轻量毛玻璃（收敛至 12px 以内） */
+.glass-panel {
+  background: linear-gradient(
+    145deg,
+    rgba(18, 30, 46, 0.84) 0%,
+    rgba(9, 16, 28, 0.92) 100%
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(190, 226, 240, 0.13);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.09),
+    0 18px 40px -14px rgba(2, 6, 14, 0.85);
+}
+
+/* 顶部状态胶囊轻量毛玻璃 */
 .glass-pill {
-  background: rgba(18, 30, 46, 0.56);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(190, 226, 240, 0.12);
+  background: rgba(16, 28, 44, 0.74);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(190, 226, 240, 0.13);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
 }
 
 /* 细微有机噪点纹理 */
 .grain-overlay {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 0);
   background-size: 24px 24px;
 }
 
@@ -88,7 +103,7 @@
   animation: soundbarPulse 1.4s ease-in-out infinite;
 }
 
-/* 呼吸中心柔和光环 */
+/* 慢速旋转星环 */
 @keyframes slowRotate {
   from {
     transform: rotate(0deg);
@@ -99,12 +114,68 @@
 }
 
 .animate-slow-rotate {
-  animation: slowRotate 28s linear infinite;
+  animation: slowRotate 32s linear infinite;
+}
+
+/* 待机态双层呼吸细环 */
+@keyframes orbBreathe {
+  0%, 100% {
+    transform: scale(0.96);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 0.88;
+  }
+}
+
+.animate-orb-breathe {
+  animation: orbBreathe 4.6s ease-in-out infinite;
+}
+
+/* 播放态丝滑水波涟漪 */
+@keyframes rippleExpand {
+  0% {
+    transform: scale(0.84);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.48);
+    opacity: 0;
+  }
+}
+
+.animate-ripple {
+  animation: rippleExpand 3.4s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+}
+
+.animate-ripple-delayed {
+  animation: rippleExpand 3.4s cubic-bezier(0.22, 0.61, 0.36, 1) 1.7s infinite;
+}
+
+/* 页面视图淡入过渡 */
+@keyframes viewFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-view-in {
+  animation: viewFadeIn 0.36s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .animate-soundbar,
-  .animate-slow-rotate {
+  .animate-slow-rotate,
+  .animate-orb-breathe,
+  .animate-ripple,
+  .animate-ripple-delayed,
+  .animate-view-in {
     animation: none;
   }
 }
